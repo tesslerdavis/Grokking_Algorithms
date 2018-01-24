@@ -14,7 +14,7 @@ BigO => O(n X n)
 
 (define lst '(10 20 300 300 30 1 3 3 100))
 
-;; find the highest number in a list
+;; finds the highest number in a list
 (define (find-highest lst)
         (letrec ([highest (car lst)]
                  [ f (lambda (lst)
@@ -43,7 +43,7 @@ BigO => O(n X n)
    (f lst)))
 
 
-;;builds a new list going from highest to lowest
+;;builds a new list going from highest to lowest, with repeats
 (define (highests->lowests lst)
 (letrec ([f (lambda (lst)
               (if (null? lst)
