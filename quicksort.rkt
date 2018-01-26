@@ -1,9 +1,23 @@
 #lang racket
 
-;;Save time with filter
+#|From Chapter 4, Quicksort
+
+To sort a list:
+               1 Choose a pivot (usually the last index but in the code here it's the first.)
+               2 Make two lists, all the numbers that are higher than the pivot and all the
+                 numbers that are lower than the pivot.
+               3 Put the pivot between the two unsorted lists.
+               4 Start back at Step 1 (recursion), but now use the list that's infront of the pivot.
+               5 The base case is an empty list or a list with one index (both meet the
+                 definition of "in the right order.")
+               6 Then do the same with the unordered list behind the pivot. Start back at Step 1.
+               7 Append the lower list to the pivot and to the higher list.
+|#
 
 (define lst (list 9 5 7 3 5 3 3))
 
+
+;;Save time with filter
 (define (quicksort lst)
   (if (null? lst)
       lst
@@ -15,8 +29,8 @@
 
 
 
-;;Spend time without filter
 
+;;Spend time without filter
 (define (my-quicksort lst)
   (letrec ([f(lambda (lst pivot)
   (if (null? lst)
@@ -45,8 +59,17 @@
            (behind-pivot (cdr lst) pivot))))
 
 
+
 (define (median-of-three lst)  ;;guesses the best pivot for any given list
   (list-ref (my-quicksort (list (car lst)
                       (round (/ (length lst) 2))
                       (list-ref lst (sub1 (length lst))))) 1))
+#|
+(define lst (list 9 5 7 3 5 3 3))
 
+CALL:
+(my-quicksort lst)
+
+RESULT:
+'(3 3 3 5 5 7 9)
+|#
