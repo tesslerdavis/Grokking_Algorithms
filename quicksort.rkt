@@ -73,16 +73,3 @@ the numbers that are larger and put them behind the pivot.|#
   (append (append (infront-pivot lst) (list (list-ref lst (sub1 (length lst))))) (behind-pivot lst)))
 
 
-
-
-
-;;not recursive, not working
-#|(define (quicksort lst)
-  (if (null? (cdr lst)
-             null
-             (cons 
-
-
-
-(infront-pivot (infront-pivot  (infront-pivot lst)))
-'(1)|#
