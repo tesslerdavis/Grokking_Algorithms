@@ -2,8 +2,7 @@
 
 #|First steps of quicksort: using the last index as the pivot, find all the numbers that
 are smaller and put them infront of the pivot and then find all
-the numbers that are larger and put them behind the pivot.
-|#
+the numbers that are larger and put them behind the pivot.|#
 
 
 (define (median-of-three lst)  ;;can be used to guess the best pivot for a list
