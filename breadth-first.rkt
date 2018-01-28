@@ -1,6 +1,6 @@
 #lang racket
 
-;very basic proof of concept that it's possible to make a hash table
+;super very basic proof of concept that it's possible to make a hash table
 ;;and search through lists assigned to keys by degree of seperation.
 
 ;makes hash table
