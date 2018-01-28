@@ -1,6 +1,6 @@
 #lang racket
 
-;make and populated hash table
+;makes and populates hash table
 (define ht (make-hash))
 (hash-set! ht "me" '("alice" "bob" "claire"))
 (hash-set! ht "alice" '("peggy"))
