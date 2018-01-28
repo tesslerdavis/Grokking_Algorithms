@@ -10,26 +10,37 @@
 (hash-set! ht "claire" '())
 
 
+;;skips repeats
+(define (already-done name name-lst)
+  (if (null? name-lst)
+      #f
+      (if (equal? name (car name-lst))
+          #t
+          (already-done name (cdr name-lst)))))
+
 ;;goes through first-nod's neighbors before moving to friends of friends.
 (define (by-degrees hashname first-nod nod-to-find)
-  (let ([que (hash-ref hashname first-nod)])
+  (let ([que (hash-ref hashname first-nod)]
+        [checked '()])
     (letrec ([f(lambda (que)
                  (cond [(null? que)
-                        "does not exist or outside friends network"]
+                        "Boo!"]
+                       [(already-done (car que) checked)(f (cdr que))] ;;checks for repeats
                        [(equal? (car que) nod-to-find)
-                        "exists inside friends network"]
+                        "Bingo!"]
                        [#t (begin
                              (set! que (append que (hash-ref hashname (car que)))) ;;failed matches add their friends to the que
+                             (set! checked (append (list(car que)) checked))
                              (f (cdr que)))]))])
       (f que))))
 
 #|
 (by-degrees ht "me" "bob")
-"exists inside friends network"
+"Bingo!"
 > (by-degrees ht "me" "jim")
-"exists inside friends network"
+"Bingo!"
 > (by-degrees ht "me" "james")
-"does not exist or outside friends network"
+"Boo!"
 > (by-degrees ht "me" "mike")
-"does not exist or outside friends network"
+"Boo!"
 |#
