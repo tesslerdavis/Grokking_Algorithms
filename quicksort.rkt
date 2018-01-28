@@ -16,7 +16,6 @@ To sort a list:
 
 (define lst (list 9 5 7 3 5 3 3))
 
-
 ;;Save time with filter
 (define (quicksort lst)
   (if (null? lst)
@@ -26,7 +25,6 @@ To sort a list:
           (let ([lowr (filter (lambda (x) (> pivot x)) to-sort)])
             (let ([highr (filter (lambda (x) (<= pivot x)) to-sort)])
               (append (quicksort lowr) (cons pivot '()) (quicksort highr))))))))
-
 
 
 
@@ -57,7 +55,6 @@ To sort a list:
       (if  (> (car lst) pivot)
            (cons (car lst)(behind-pivot (cdr lst) pivot))
            (behind-pivot (cdr lst) pivot))))
-
 
 
 (define (median-of-three lst)  ;;guesses the best pivot for any given list
