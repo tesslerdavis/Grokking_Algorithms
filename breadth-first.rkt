@@ -1,19 +1,16 @@
 #lang racket
 
-;makes hash table
+;make and populated hash table
 (define ht (make-hash))
-
-;adds to it
 (hash-set! ht "me" '("alice" "bob" "claire"))
 (hash-set! ht "alice" '("peggy"))
 (hash-set! ht "peggy" '())
 (hash-set! ht "bob" '("jim"))
+(hash-set! ht "jim" '())
 (hash-set! ht "claire" '())
 
 
-;;takes a hash table, start nod, and search nod.
-;;goes through nod neighbors before moving to friends of friends.
-
+;;goes through first-nod's neighbors before moving to friends of friends.
 (define (by-degrees hashname first-nod nod-to-find)
   (let ([que (hash-ref hashname first-nod)])
     (letrec ([f(lambda (que)
@@ -23,5 +20,16 @@
                         "exists inside friends network"]
                        [#t (begin
                              (set! que (append que (hash-ref hashname (car que)))) ;;failed matches add their friends to the que
-                                          (f (cdr que)))]))])
-(f que))))
+                             (f (cdr que)))]))])
+      (f que))))
+
+#|
+(by-degrees ht "me" "bob")
+"exists inside friends network"
+> (by-degrees ht "me" "jim")
+"exists inside friends network"
+> (by-degrees ht "me" "james")
+"does not exist or outside friends network"
+> (by-degrees ht "me" "mike")
+"does not exist or outside friends network"
+|#
