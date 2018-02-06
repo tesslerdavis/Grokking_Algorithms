@@ -18,15 +18,15 @@
           #t
           (already-done name (cdr name-lst)))))
 
-;;goes through first-nod's neighbors before moving to friends of friends.
-(define (by-degrees hashname first-nod nod-to-find)
-  (let ([que (hash-ref hashname first-nod)]
+;;goes through first-node's neighbors before moving to friends of friends.
+(define (by-degrees hashname first-node node-to-find)
+  (let ([que (hash-ref hashname first-node)]
         [checked '()])
     (letrec ([f(lambda (que)
                  (cond [(null? que)
                         "Boo!"]
                        [(already-done (car que) checked)(f (cdr que))] ;;checks for repeats
-                       [(equal? (car que) nod-to-find)
+                       [(equal? (car que) node-to-find)
                         "Bingo!"]
                        [#t (begin
                              (set! que (append que (hash-ref hashname (car que)))) ;;failed matches add their friends to the que
